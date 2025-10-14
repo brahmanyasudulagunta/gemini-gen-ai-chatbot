@@ -1,12 +1,56 @@
-# React + Vite
+# Gemini Gen AI Chatbot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Gemini Gen AI Chatbot**! This project is a sample chatbot powered by Google's Gemini Flash API, built using React and Vite. It allows users to interact with an AI assistant and receive responses in real-time.
 
-Currently, two official plugins are available:
+🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **AI-powered chatbot** using Google's Gemini Flash API
+* **Real-time message handling** with smooth user experience
+* **Responsive and modern UI** built with React and Vite
+* **Error handling** for failed API calls
+* **Easy setup and deployment**
 
-## Expanding the ESLint configuration
+🛠️ Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Frontend**: React, Vite
+* **AI Model**: Google's Gemini Flash API
+* **Styling**: Tailwind CSS (optional, based on your project's setup)
+
+
+📥 Installation & Setup
+
+1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Ashrith2727/gemini-gen-ai-chatbot.git
+cd gemini-gen-ai-chatbot
+```
+
+2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+3️⃣ Set Up Environment Variables
+
+Create a `.env` file in the root directory and add your Gemini Flash API key:
+
+```
+VITE_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="Add your API Key Here"
+
+```
+
+*Note: Replace `your_api_key_here` with your actual API key.*
+
+4️⃣ Start the Development Server
+
+```bash
+npm run dev
+```
+
+⚙️ Customization
+
+* **AI Model**: To switch to a different AI model, update the API endpoint in the `src/api.js` file.
+* **Styling**: Modify the `src/App.css` file to change the look and feel of the chatbot.
+* **Components**: Customize the components in the `src/components/` directory to add new features or modify existing ones.
