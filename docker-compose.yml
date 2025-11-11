@@ -4,10 +4,11 @@ services:
       context: .
       dockerfile: Dockerfile # Assuming you have a specific Dockerfile for dev
     ports:
-      - "6000:6000" # Map host port 3000 to container port 3000 (common for React/Vue/Angular dev servers)
+      - "6000:80" # Map host port 3000 to container port 3000 (common for React/Vue/Angular dev servers)
     volumes:
       - .:/app # Mount your local project directory into the container's working directory
       - /app/node_modules # Exclude node_modules from the mount to avoid host/container conflicts
     environment:
-      NODE_ENV: development # Set environment variables if needed
-    # command: npm start # The command might be defined in your Dockerfile.dev
+      # !! REPLACE "YOUR_ACTUAL_GEMINI_API_KEY" with your real key !!
+      VITE_GEMINI_API_KEY: AIzaSyB--W5grgyM_oyVa4hikt5OQFbm59s-ZiU
+    restart: always
