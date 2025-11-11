@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     echo "🚀 Running new container..."
-                    sh 'docker run -d -p ${PORT}:80 --name $CONTAINER_NAME $IMAGE_NAME'
+                    sh 'docker run -d -p ${PORT}:5173 --name $CONTAINER_NAME $IMAGE_NAME'
                 }
             }
         }
