@@ -11,4 +11,3 @@ services:
     environment:
       # !! REPLACE "YOUR_ACTUAL_GEMINI_API_KEY" with your real key !!
       VITE_GEMINI_API_KEY: AIzaSyB--W5grgyM_oyVa4hikt5OQFbm59s-ZiU
-    restart: always
