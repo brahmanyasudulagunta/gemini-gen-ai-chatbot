@@ -1,7 +1,5 @@
-# Step 1: Build stage
-FROM node:20-alpine AS build
+FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
 # Copy package files
@@ -10,20 +8,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy rest of the code
+# Copy all project files
 COPY . .
 
-# Build the project
-RUN npm run build
+# Expose Vite default port
+EXPOSE 5173
 
-# Step 2: Production stage (Nginx)
-FROM nginx:alpine
-
-# Copy built files from build stage to nginx html directory
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Expose port 80 for web
-EXPOSE 80
-
-# Run nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Run the dev server (disable host checking for container)
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

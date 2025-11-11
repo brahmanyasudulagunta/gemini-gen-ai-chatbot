@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "vite"
         CONTAINER_NAME = "vite-container"
-        PORT = "80"
+        PORT = "5173"
     }
 
     stages {
