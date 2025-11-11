@@ -37,7 +37,7 @@ npm install
 Create a `.env` file in the root directory and add your Gemini Flash API key:
 
 ```
-VITE_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="Add your API Key Here"
+VITE_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key= "Add your API Key Here"
 
 ```
 
