@@ -2,12 +2,14 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile # Assuming you have a specific Dockerfile for dev
+      dockerfile: Dockerfile
     ports:
-      - "6000:80" # Map host port 3000 to container port 3000 (common for React/Vue/Angular dev servers)
+      # Mapped to 6000 on the host, but assuming the application inside the
+      # container is listening on the standard development port: 3000.
+      - "6000:5171" 
     volumes:
-      - .:/app # Mount your local project directory into the container's working directory
-      - /app/node_modules # Exclude node_modules from the mount to avoid host/container conflicts
+      - .:/app
+      - /app/node_modules
     environment:
       # !! REPLACE "YOUR_ACTUAL_GEMINI_API_KEY" with your real key !!
       VITE_GEMINI_API_KEY: AIzaSyB--W5grgyM_oyVa4hikt5OQFbm59s-ZiU
