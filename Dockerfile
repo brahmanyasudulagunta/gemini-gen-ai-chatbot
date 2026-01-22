@@ -3,9 +3,11 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Accept API key as build argument
-ARG REACT_APP_API_KEY
+ARG VITE_API_KEY
+ARG VITE_API_URL
 # Set environment variable for React app
-ENV REACT_APP_API_KEY=${REACT_APP_API_KEY}
+ENV VITE_API_KEY=${VITE_API_KEY}
+ENV VITE_API_URL=${VITE_API_URL}
 
 # Copy package files
 COPY package*.json ./
