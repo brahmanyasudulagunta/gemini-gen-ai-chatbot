@@ -5,6 +5,7 @@ pipeline {
         IMAGE_NAME = "vite"
         CONTAINER_NAME = "vite-container"
         PORT = "5173"
+        REACT_APP_API_KEY = credentials('gemini') // Use Jenkins credentials
     }
 
     stages {
@@ -19,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo "🐳 Building Docker image..."
-                    sh 'docker build -t $IMAGE_NAME .'
+                    sh 'docker build --build-arg REACT_APP_API_KEY=$REACT_APP_API_KEY -t $IMAGE_NAME .'
                 }
             }
         }
@@ -50,6 +51,8 @@ pipeline {
                 }
             }
         }
+       
+
     }
 
     post {
