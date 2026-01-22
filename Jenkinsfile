@@ -5,7 +5,8 @@ pipeline {
         IMAGE_NAME = "vite"
         CONTAINER_NAME = "vite-container"
         PORT = "5173"
-        REACT_APP_API_KEY = credentials('gemini') // Use Jenkins credentials
+        VITE_API_KEY = credentials('gemini') // Use Jenkins credentials
+        VITE_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key='
     }
 
     stages {
@@ -20,7 +21,7 @@ pipeline {
             steps {
                 script {
                     echo "🐳 Building Docker image..."
-                    sh 'docker build --build-arg REACT_APP_API_KEY=$REACT_APP_API_KEY -t $IMAGE_NAME .'
+                    sh 'docker build --build-arg VITE_API_KEY=$VITE_API_KEY --build-arg VITE_API_URL=$VITE_API_URL -t $IMAGE_NAME .'
                 }
             }
         }

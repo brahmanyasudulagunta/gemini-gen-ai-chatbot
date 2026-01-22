@@ -119,7 +119,7 @@ const App = () => {
       parts: [{ text: msg.content }],
     }));
     try {
-      const res = await fetch(import.meta.env.VITE_API_URL, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ contents: formattedMessages }),
