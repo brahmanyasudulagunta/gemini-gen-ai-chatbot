@@ -5,63 +5,57 @@ pipeline {
         IMAGE_NAME = "vite"
         CONTAINER_NAME = "vite-container"
         PORT = "5173"
-        VITE_API_KEY = credentials('gemini') // Use Jenkins credentials
         VITE_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key='
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                echo "✅ Checking out source code from Git..."
-                // Jenkins will automatically checkout code from SCM
+                echo "Checking out source code..."
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    echo "🐳 Building Docker image..."
-                    sh 'docker build --build-arg VITE_API_KEY=$VITE_API_KEY --build-arg VITE_API_URL=$VITE_API_URL -t $IMAGE_NAME .'
-                }
+                echo "Building Docker image (no secrets)..."
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                script {
-                    echo "🧹 Stopping old container (if running)..."
-                    sh 'docker rm -f $CONTAINER_NAME || true'
-                }
+                sh 'docker rm -f $CONTAINER_NAME || true'
             }
         }
 
         stage('Run New Container') {
             steps {
-                script {
-                    echo "🚀 Running new container..."
-                    sh 'docker run -d -p ${PORT}:5173 --name $CONTAINER_NAME $IMAGE_NAME'
+                withCredentials([string(credentialsId: 'gemini', variable: 'GEMINI_API_KEY')]) {
+                    sh '''
+                      docker run -d \
+                        -p ${PORT}:5173 \
+                        --name $CONTAINER_NAME \
+                        -e VITE_API_KEY=$GEMINI_API_KEY \
+                        -e VITE_API_URL=$VITE_API_URL \
+                        $IMAGE_NAME
+                    '''
                 }
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                script {
-                    echo "🔍 Checking running containers..."
-                    sh 'docker ps | grep $CONTAINER_NAME'
-                }
+                sh 'docker ps | grep $CONTAINER_NAME'
             }
         }
-       
-
     }
 
     post {
         success {
-            echo "✅ Deployment complete! Visit your chatbot at http://<server-ip>:${PORT}"
+            echo "✅ Deployment complete!"
         }
         failure {
-            echo "❌ Build failed. Check Jenkins logs for details."
+            echo "❌ Build failed."
         }
     }
 }
