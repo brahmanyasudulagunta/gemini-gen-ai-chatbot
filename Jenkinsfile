@@ -17,8 +17,9 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                docker.withRegistry('https://index.docker.io', 'dockerhub')
+                docker.withRegistry('https://index.docker.io', 'dockerhub') {
                 sh 'docker build -t $IMAGE_NAME .'
+               }
             }
         }
 
