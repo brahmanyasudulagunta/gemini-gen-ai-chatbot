@@ -17,12 +17,16 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                docker.withRegistry('https://index.docker.io', 'dockerhub') {
-                sh 'docker build -t $IMAGE_NAME .'
-               }
-            }
-        }
-
+                echo "Building Docker image with credentials..."
+               // Wrap the docker command in a script block
+               script {
+                   docker.withRegistry('https://index.docker.io', 'dockerhub') {
+                   sh 'docker build -t $IMAGE_NAME .'
+                      }
+                }
+             }
+        }   
+        
         stage('Stop Old Container') {
             steps {
                 sh 'docker rm -f $CONTAINER_NAME || true'
