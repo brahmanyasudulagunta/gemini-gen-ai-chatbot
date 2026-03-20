@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image (no secrets)..."
+                docker.withRegistry('https://index.docker.io', 'dockerhub')
                 sh 'docker build -t $IMAGE_NAME .'
             }
         }
